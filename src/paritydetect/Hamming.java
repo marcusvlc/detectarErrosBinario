@@ -22,7 +22,6 @@ public class Hamming {
 						devoAcumular = true;
 					}
 					
-					
 					if(devoAcumular) {
 						acum += binary[comecarAcumular];
 						qntAcumulada++;
@@ -30,23 +29,15 @@ public class Hamming {
 					} else {
 						qntAcumulada--;
 					}
-					
-				
-					
+	
 					comecarAcumular++;
 					
 				}
-				
-				
 				 if(possuiErro(binary[parityNumber], acum)) {
 					 return true;
-				 }
-					 
+				 }		 
 			}
-			
-			
 		}
-		
 		
 		return false;
 	}
@@ -57,14 +48,13 @@ public class Hamming {
 		
 		if(binarioDaParidade == 0 && (acumulador % 2 == 0)) {
 			retorno = false;
-		} else if(binarioDaParidade == 1 & (acumulador % 2 == 1)) {
+		} else if(binarioDaParidade == 1 && (acumulador % 2 == 1)) {
 			retorno = false;
 		} else {
 			retorno = true;
 		}
 		
-		return retorno;
-		
+		return retorno;	
 	}
 	
 	
