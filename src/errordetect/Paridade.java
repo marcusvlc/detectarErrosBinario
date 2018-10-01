@@ -1,4 +1,4 @@
-package paritydetect;
+package errordetect;
 
 
 public class Paridade {
