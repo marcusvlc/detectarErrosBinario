@@ -6,20 +6,13 @@ import java.util.List;
 
 public class Hamming {
 	
-    public static List<Integer> range(int min, int max) {
-        List<Integer> list = new ArrayList();
-        for (int i = min; i <= max; i++) {
-            list.add(i);
-        }
-
-        return list;
-    }
-    
+   
 	public boolean detectErrorHamming(int[] binary) {
+		ArrayList<Integer> paridadesErradas = new ArrayList<Integer>();
 		
 		boolean temErro = false;
-		ArrayList<Integer> indicesErrados = new ArrayList<Integer>();
-				for(int i = 0; i < binary.length; i++) {
+			
+		for(int i = 0; i < binary.length; i++) {
 			int parityNumber =  (int) Math.pow(2, i);
 			ArrayList<Integer> indicesTemporarios = new ArrayList<Integer>();
 			if(parityNumber < binary.length) {
@@ -54,32 +47,53 @@ public class Hamming {
 				}
 				 if(possuiErro(binary[parityNumber], acum)) {
 					 temErro =  true;
-					 // PASSAR OS TEMPORARIOS PRO ERRADO
-					 indicesErrados.addAll(indicesTemporarios);
-					 
+					 paridadesErradas.add(parityNumber);			 
 				 }		 
 			}
 		}
 		
-		System.out.println(getUniq(indicesErrados,range(1, binary.length)));
-		System.out.println(indicesErrados);	
-		
+		if(temErro) {
+			
+			corrige(paridadesErradas, binary);
+	
+			
+		} else {
+			System.out.println("Bloco correto");
+		}
 		return temErro;
 	}
-	
-	
-	private ArrayList<Integer> getUniq(ArrayList<Integer> indicesErrados, List<Integer> range) {
-		ArrayList<Integer> repeated = new ArrayList<Integer>();
-		for (int i = 0; i < indicesErrados.size(); i++) {
-			int atual = indicesErrados.get(i);
+		
+	private void corrige(ArrayList<Integer> paridadesErradas, int[] binary) {
+		if (paridadesErradas.size()  % 2 == 0) {
+			int acum = 0;
 			
-			for (int j = i+1; j < indicesErrados.size(); j++) {
-				if (atual == indicesErrados.get(j)) {
-					repeated.add(indicesErrados.get(j));
-				}
+			for(int i = 0 ; i < paridadesErradas.size();i++) {
+				acum+= paridadesErradas.get(i);
+			}
+			
+			if(acum < binary.length) {
+				if(binary[acum] == 0) 
+					binary[acum] = 1;
+				 else 
+					binary[acum] = 0;
+			}
+			
+			System.out.println("O binario corrigido (com as paridades) eh: " + Arrays.toString(binary));
+						
+		} else {
+			System.out.println("Nao eh possivel corrigir, numero de paridades erradas eh impar");
+		}
+	}
+
+
+	public boolean estaContido(int numero, ArrayList<Integer> lista) {
+		for(int i = 0; i < lista.size(); i++) {
+			if(lista.get(i) == numero) {
+				return true;
 			}
 		}
-		return repeated;
+		
+		return false;
 	}
 
 	public boolean possuiErro(int binarioDaParidade, int acumulador) {
@@ -93,10 +107,9 @@ public class Hamming {
 			retorno = true;
 		}
 		
-		System.out.println(acumulador);
 		return retorno;	
 	}
-	
+
 	
 	public static void main(String[] args) {
 		Hamming h = new Hamming();
@@ -105,9 +118,13 @@ public class Hamming {
 		
 		// Considerar o binario passado ja no padrao de hamming
 		int naoConsiderar = 0;
+
 		int[] binario = {naoConsiderar,0,1,1,1,1,0,0,1,1,1,1,1};
-		
-		System.out.println(h.detectErrorHamming(binario));
+		h.detectErrorHamming(binario);
+		int[] binario1 = {naoConsiderar,0,1,0,0,1,1,1};
+		h.detectErrorHamming(binario1);
+		int[] binario2 = {naoConsiderar,0};
+		h.detectErrorHamming(binario2);
 	}
 
 }

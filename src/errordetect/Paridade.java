@@ -48,6 +48,10 @@ public class Paridade {
 	public static void main(String[] args) throws Exception {
 		Paridade p = new Paridade();
 		System.out.println(p.detectarErroParidade("001", "impar"));
+		System.out.println(p.detectarErroParidade("011101", "par"));
+		System.out.println(p.detectarErroParidade("001111", "impar"));
+		System.out.println(p.detectarErroParidade("0110001", "par"));
+
 	}
 
 }
