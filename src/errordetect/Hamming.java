@@ -19,8 +19,7 @@ public class Hamming {
 		
 		boolean temErro = false;
 		ArrayList<Integer> indicesErrados = new ArrayList<Integer>();
-		
-		for(int i = 0; i < binary.length; i++) {
+				for(int i = 0; i < binary.length; i++) {
 			int parityNumber =  (int) Math.pow(2, i);
 			ArrayList<Integer> indicesTemporarios = new ArrayList<Integer>();
 			if(parityNumber < binary.length) {
@@ -62,8 +61,7 @@ public class Hamming {
 			}
 		}
 		
-//		System.out.println(indicesErrados);
-		getUniq(indicesErrados,range(1, binary.length));
+		System.out.println(getUniq(indicesErrados,range(1, binary.length)));
 		System.out.println(indicesErrados);	
 		
 		return temErro;
@@ -75,7 +73,7 @@ public class Hamming {
 		for (int i = 0; i < indicesErrados.size(); i++) {
 			int atual = indicesErrados.get(i);
 			
-			for (int j = i; j < indicesErrados.size(); j++) {
+			for (int j = i+1; j < indicesErrados.size(); j++) {
 				if (atual == indicesErrados.get(j)) {
 					repeated.add(indicesErrados.get(j));
 				}
