@@ -6,8 +6,10 @@ import java.util.List;
 
 public class Hamming {
 	
-   
-	public boolean detectErrorHamming(int[] binary) {
+   /**
+    * Verifica se têm bits de pariade errados num array e, se sim, quais. E imprime o binário correto, se possível.
+    */
+	public boolean detectaErroHamming(int[] binary) {
 		ArrayList<Integer> paridadesErradas = new ArrayList<Integer>();
 		
 		boolean temErro = false;
@@ -52,17 +54,18 @@ public class Hamming {
 			}
 		}
 		
-		if(temErro) {
-			
+		if(temErro) 
 			corrige(paridadesErradas, binary);
-	
-			
-		} else {
+		 else 
 			System.out.println("Bloco correto");
-		}
+		
 		return temErro;
 	}
-		
+	
+	/**
+	 * Recebe um conjunto de bits de paridade que estão errados em um array de bits codificados em código de hamming.
+	 * Se for possível corrigir um bit, ele é invertido. Se o número de erros for maior, nada pode ser feito.
+	 */
 	private void corrige(ArrayList<Integer> paridadesErradas, int[] binary) {
 		if (paridadesErradas.size()  % 2 == 0) {
 			int acum = 0;
@@ -85,14 +88,14 @@ public class Hamming {
 		}
 	}
 
-
+	/**
+	 Verifica se um número está contido num ArrayList
+	 */
 	public boolean estaContido(int numero, ArrayList<Integer> lista) {
 		for(int i = 0; i < lista.size(); i++) {
-			if(lista.get(i) == numero) {
+			if(lista.get(i) == numero) 
 				return true;
-			}
 		}
-		
 		return false;
 	}
 
@@ -120,11 +123,11 @@ public class Hamming {
 		int naoConsiderar = 0;
 
 		int[] binario = {naoConsiderar,0,1,1,1,1,0,0,1,1,1,1,1};
-		h.detectErrorHamming(binario);
+		h.detectaErroHamming(binario);
 		int[] binario1 = {naoConsiderar,0,1,0,0,1,1,1};
-		h.detectErrorHamming(binario1);
+		h.detectaErroHamming(binario1);
 		int[] binario2 = {naoConsiderar,0};
-		h.detectErrorHamming(binario2);
+		h.detectaErroHamming(binario2);
 	}
 
 }
